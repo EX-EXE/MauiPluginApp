@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MauiPluginApp"
+             x:Class="MauiPluginApp.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" x:Name="List" ItemsSource="{Binding PluginService.Plugins}" SelectedItem="{Binding SelectedPlugin}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center"></Label>
+
+                            <Button Grid.Column="1" Text="Load/Unload" VerticalOptions="Center" 
+                                    Command="{Binding BindingContext.RunCommand,Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding}"></Button>
+                        </Grid>
+                    </ViewCell>
+
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        -->
+                    <!--<Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center"></Label>-->
+                    <!--
+                        <Label Grid.Column="1" Text="Afd" VerticalOptions="Center"></Label>
+                    </Grid>-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <ScrollView Grid.Row="1">
+            <ContentPresenter Content="{Binding Control}" ></ContentPresenter>
+        </ScrollView>
+    </Grid>
+
+
+</ContentPage>
